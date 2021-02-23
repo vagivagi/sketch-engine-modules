@@ -26,7 +26,7 @@ public class SketchEngineClientApplication implements CommandLineRunner {
         RestTemplate restTemplate = builder.rootUri("https://api.sketchengine.eu")
                 .basicAuthentication(username, apiKey).build();
         SketchEngineWebClientImpl sketchEngineWebClient = new SketchEngineWebClientImpl(restTemplate);
-        for (Word word : sketchEngineWebClient.getThes("study")) {
+        for (Word word : sketchEngineWebClient.getThesaurus("study")) {
             System.out.println(word);
         }
     }
