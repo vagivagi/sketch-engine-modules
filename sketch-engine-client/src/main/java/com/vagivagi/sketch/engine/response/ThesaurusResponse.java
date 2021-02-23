@@ -22,7 +22,7 @@ public class ThesaurusResponse {
     private Map<String, String> wsposDict;
     @JsonProperty("api_version")
     private String apiVersion;
-    private Map<String, String> request;
+    private Request request;
     @JsonProperty("Words")
     private List<Word> words;
 
@@ -114,11 +114,11 @@ public class ThesaurusResponse {
         this.apiVersion = apiVersion;
     }
 
-    public Map<String, String> getRequest() {
+    public Request getRequest() {
         return request;
     }
 
-    public void setRequest(Map<String, String> request) {
+    public void setRequest(Request request) {
         this.request = request;
     }
 
@@ -128,5 +128,49 @@ public class ThesaurusResponse {
 
     public void setWords(List<Word> words) {
         this.words = words;
+    }
+
+    public static class Word {
+        private String word;
+        private double score;
+        private int freq;
+        private int id;
+
+        public String getWord() {
+            return word;
+        }
+
+        public void setWord(String word) {
+            this.word = word;
+        }
+
+        public double getScore() {
+            return score;
+        }
+
+        public void setScore(double score) {
+            this.score = score;
+        }
+
+        public int getFreq() {
+            return freq;
+        }
+
+        public void setFreq(int freq) {
+            this.freq = freq;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public String toString() {
+            return "word=" + this.word + ", score=" + this.score + ", freq=" + this.freq + ", id=" + this.id;
+        }
     }
 }
