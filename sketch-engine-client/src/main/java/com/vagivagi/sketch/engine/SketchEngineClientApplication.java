@@ -1,7 +1,9 @@
 package com.vagivagi.sketch.engine;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vagivagi.sketch.engine.client.SketchEngineWebClientImpl;
-import com.vagivagi.sketch.engine.response.Word;
+import com.vagivagi.sketch.engine.response.ThesaurusResponse;
+import com.vagivagi.sketch.engine.response.WordSketchResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,8 +28,12 @@ public class SketchEngineClientApplication implements CommandLineRunner {
         RestTemplate restTemplate = builder.rootUri("https://api.sketchengine.eu")
                 .basicAuthentication(username, apiKey).build();
         SketchEngineWebClientImpl sketchEngineWebClient = new SketchEngineWebClientImpl(restTemplate);
-        for (Word word : sketchEngineWebClient.getThesaurus("study")) {
+        for (ThesaurusResponse.Word word : sketchEngineWebClient.getThesaurus("study").getWords()) {
             System.out.println(word);
         }
+        WordSketchResponse output = sketchEngineWebClient.getWordSketch("study");
+        ObjectMapper mapper = new ObjectMapper();
+        String outputFormatted = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(output);
+        System.out.println(outputFormatted);
     }
 }
