@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Map;
 
-public class ThesResponse {
+public class ThesaurusResponse {
     private String lemma;
     @JsonProperty("lemma_conc_link")
     private String lemmaConcLink;
