@@ -17,6 +17,8 @@ public class SketchEngineClientApplication implements CommandLineRunner {
     private String username;
     @Value("${apiKey}")
     private String apiKey;
+    @Value("${url}")
+    private String url;
 
     public static void main(String[] args) {
         SpringApplication.run(SketchEngineClientApplication.class, args);
@@ -25,7 +27,7 @@ public class SketchEngineClientApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         RestTemplateBuilder builder = new RestTemplateBuilder();
-        RestTemplate restTemplate = builder.rootUri("https://api.sketchengine.eu")
+        RestTemplate restTemplate = builder.rootUri(url)
                 .basicAuthentication(username, apiKey).build();
         SketchEngineWebClientImpl sketchEngineWebClient = new SketchEngineWebClientImpl(restTemplate);
         for (ThesaurusResponse.Word word : sketchEngineWebClient.getThesaurus("study").getWords()) {
