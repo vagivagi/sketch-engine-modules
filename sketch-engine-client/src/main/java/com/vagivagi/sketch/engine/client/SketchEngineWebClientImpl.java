@@ -2,6 +2,7 @@ package com.vagivagi.sketch.engine.client;
 
 import com.vagivagi.sketch.engine.response.ThesaurusResponse;
 import com.vagivagi.sketch.engine.response.WordSketchResponse;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,10 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SketchEngineWebClientImpl implements SketchEngineWebClient {
+    private final static String BASE_URL = "https://api.sketchengine.eu";
     private final RestTemplate restTemplate;
 
-    public SketchEngineWebClientImpl(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public SketchEngineWebClientImpl(String username, String apiKey) {
+        RestTemplateBuilder builder = new RestTemplateBuilder();
+        this.restTemplate = builder.rootUri(BASE_URL)
+                .basicAuthentication(username, apiKey).build();
     }
 
     @Override
