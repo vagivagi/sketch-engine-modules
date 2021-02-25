@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class SketchEngineClientApplication implements CommandLineRunner {
@@ -17,8 +15,6 @@ public class SketchEngineClientApplication implements CommandLineRunner {
     private String username;
     @Value("${apiKey}")
     private String apiKey;
-    @Value("${url}")
-    private String url;
 
     public static void main(String[] args) {
         SpringApplication.run(SketchEngineClientApplication.class, args);
@@ -26,10 +22,7 @@ public class SketchEngineClientApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        RestTemplateBuilder builder = new RestTemplateBuilder();
-        RestTemplate restTemplate = builder.rootUri(url)
-                .basicAuthentication(username, apiKey).build();
-        SketchEngineWebClientImpl sketchEngineWebClient = new SketchEngineWebClientImpl(restTemplate);
+        SketchEngineWebClientImpl sketchEngineWebClient = new SketchEngineWebClientImpl(username, apiKey);
         for (ThesaurusResponse.Word word : sketchEngineWebClient.getThesaurus("study").getWords()) {
             System.out.println(word);
         }
