@@ -1,7 +1,7 @@
 package com.vagivagi.sketch.engine.client;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -16,7 +16,7 @@ public class SketchEngineWebClientImplTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void get_word_sketch(){
 
     }
