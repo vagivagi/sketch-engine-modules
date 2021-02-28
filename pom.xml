@@ -16,6 +16,7 @@
         <module>sketch-engine-client</module>
         <module>sketch-engine-autoconfigure</module>
         <module>spring-boot-starter-sketch-engine</module>
+        <module>sketch-engine-client-sample</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
